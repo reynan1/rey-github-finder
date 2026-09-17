@@ -6,7 +6,7 @@ import Spinner from "../components/layout/Spinner"
 import GithubContext from "../context/github/GithubContext"
 import RepoList from "../components/repos/RepoList";
 import { getUserAndRepos } from "../context/github/GithubAction";
-
+import type { IUser } from "../types/GitUser";
 function User() {
   const {  user, isLoading, repos, dispatch} = useContext(GithubContext)
   const params = useParams<{login: string}>()
@@ -38,7 +38,7 @@ function User() {
     public_repos,
     public_gists,
     hireable,
-  } = user
+  } = user as unknown as IUser
   
 
   if(isLoading) {
@@ -58,7 +58,7 @@ function User() {
           <div className="custom-card-image mb-6 md:mb-0">
             <div className="rounded-lg shadow-xl card image-full">
               <figure>
-                <img src={ avatar_url }  className="h-full w-full object-cover" alt={ name } />
+                <img src={ avatar_url }  className="h-full w-full object-cover" alt={ name ? name : 'image_profile' } />
               </figure>
               
               <div className="card-body">

@@ -1,4 +1,5 @@
 import { FaEye, FaInfo, FaLink, FaStar, FaUtensils } from "react-icons/fa"
+import type { IGithubRepo } from "../../types/GithubRepo"
 
 
 function RepoItem({repo}: Record<string, unknown>) {
@@ -10,7 +11,7 @@ function RepoItem({repo}: Record<string, unknown>) {
     open_issues,
     watchers_count,
     stargazers_count,
-  } = repo
+  } = repo as IGithubRepo
 
   return (
     <div className="mb-2 rounded-md card bg-gray-800 hover:bg-gray-900">
@@ -34,7 +35,7 @@ function RepoItem({repo}: Record<string, unknown>) {
             <FaInfo className="mr-2" /> {open_issues}
           </div>
           <div className="mr-2 badge badge-warning badge-lg">
-            <FaUtensils className="mr-2" /> {watchers_count}
+            <FaUtensils className="mr-2" /> {forks}
           </div>
         </div>
       </div>

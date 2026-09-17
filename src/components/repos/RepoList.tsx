@@ -1,6 +1,8 @@
 import RepoItem from "./RepoItem"
+import type { RepoListProps } from "../../types/GithubRepo"
 
-function RepoList({repos}:any) {
+
+function RepoList({repos}: RepoListProps) {
   return (
     <div className="rounded-lg shadow-lg card bg-base-100">
       <div className="card-body">

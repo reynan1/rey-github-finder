@@ -1,9 +1,10 @@
 import type { IGithubUser } from "../../types/GitUser"
+import type { IGithubRepo } from "../../types/GithubRepo"  
 
 interface State {
   users: IGithubUser[]
   user: IGithubUser
-  repos: Record<string, unknown>[],
+  repos: IGithubRepo[],
   isLoading: boolean
 }
 
@@ -17,7 +18,7 @@ type Action =
     }
  |  {
       type: 'GET_USERS_AND_REPOS'
-      payload: {user: IGithubUser, repos: Record<string, unknown>[]}
+      payload: {user: IGithubUser, repos: IGithubRepo[]}
     }   
  |  {
       type: 'CLEAR_USERS'
