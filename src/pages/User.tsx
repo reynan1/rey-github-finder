@@ -1,22 +1,27 @@
 import { useContext, useEffect } from "react"
 import { FaCodepen, FaStore, FaUserFriends, FaUsers} from "react-icons/fa";
+import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
 import Spinner from "../components/layout/Spinner"
 import GithubContext from "../context/github/GithubContext"
-import { useParams } from "react-router-dom"
 import RepoList from "../components/repos/RepoList";
+import { getUserAndRepos } from "../context/github/GithubAction";
 
 function User() {
-  const { userProfile, user, isLoading, getUserRepos, repos} = useContext(GithubContext)
+  const {  user, isLoading, repos, dispatch} = useContext(GithubContext)
   const params = useParams<{login: string}>()
-  useEffect(() => {
-    if(params.login){
-      userProfile(params.login)
-      getUserRepos(params.login)
 
-      console.log("respos: " + repos)
+  useEffect(() => {
+    dispatch({ type: 'SET_LOADING'})
+    const getUserData = async () => {
+      if(params.login){
+         const data = await getUserAndRepos(params.login) 
+            console.log("false....")
+         dispatch({ type: 'GET_USERS_AND_REPOS', payload: { user: data.user, repos: data.repos } })
+      }
     }
-  }, [])
+    getUserData()
+  }, [dispatch, params.login])
 
   const {
     name,
@@ -37,11 +42,9 @@ function User() {
   
 
   if(isLoading) {
-    <Spinner />
+    return (<Spinner />)
   }
 
-
-  
   return (
     <>
       <div className="w-full mx-auto lg:w-10/12">

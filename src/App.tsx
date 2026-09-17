@@ -20,9 +20,18 @@ function App() {
             <main className='container mx-auto px-3 pb-12'>
               <Alert />  
               <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={
+                  <>
+                  <Alert />
+                  <Home />
+                  </>} />
                 <Route path="/about" element={<About />} />
-                <Route path="/users/:login" element={<User />}  />
+                <Route path="/users/:login" element={
+                  <>
+                  <Alert />
+                  <User />
+                  </>
+                  }  />
                 <Route path="/notFound" element={<NotFound />} />
                 <Route path="/*" element={<NotFound/>} />
               </Routes> 

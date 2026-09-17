@@ -9,24 +9,21 @@ interface State {
 
 type Action = 
  |  {
+      type: 'SET_LOADING'
+    }
+ |  {
       type: 'GET_USERS'
       payload: IGithubUser[]
     }
  |  {
-      type: 'LOGIN_USER'
-      payload: IGithubUser
+      type: 'GET_USERS_AND_REPOS'
+      payload: {user: IGithubUser, repos: Record<string, unknown>[]}
     }   
- |  {
-      type: 'GET_REPOS'
-      payload: Record<string, unknown>[]
-    }    
  |  {
       type: 'CLEAR_USERS'
       payload: IGithubUser[]
     }    
- |  {
-      type: 'SET_LOADING'
-    }
+    
 const githubReducer = (state: State, action: Action) => {
   switch(action.type) {
     case 'GET_USERS': 
@@ -35,16 +32,11 @@ const githubReducer = (state: State, action: Action) => {
         users: action.payload,
         isLoading: false
       }
-    case 'LOGIN_USER': 
+    case 'GET_USERS_AND_REPOS': 
       return {
         ...state,
-        user: action.payload,
-        isLoading: false
-    }
-    case 'GET_REPOS': 
-      return {
-        ...state,
-        repos: action.payload,
+        user: action.payload.user,
+        repos: action.payload.repos,
         isLoading: false
     }
     case 'CLEAR_USERS':  

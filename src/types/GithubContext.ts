@@ -6,10 +6,7 @@ export interface IGithubContext {
    user: IGithubUser,
    repos: Record<string, unknown>[],
    isLoading: boolean
-   searchUsers: (text: string) => Promise<void>
-   userProfile: (login: string) => void
-   clearUsers: () => void
-   getUserRepos: (login: string) => void
+   dispatch: any,
 }
 
 export interface IGithubContextProviderProps {
