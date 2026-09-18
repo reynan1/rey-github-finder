@@ -1,6 +1,6 @@
 import axios from "axios"
-const GITHUB_URL = import.meta.env.VITE_APP_GITHUB_URL
-const GITHUB_TOKEN =  import.meta.env.VITE_APP_GITHUB_TOKEN 
+const GITHUB_URL = import.meta.env.GITHUB_URL
+const GITHUB_TOKEN =  import.meta.env.GITHUB_TOKEN 
 
 const github = axios.create(({
   baseURL: GITHUB_URL,
